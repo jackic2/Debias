@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8"></meta>
+  <meta charset="UTF-8">
   <title>Talismán de Aarón</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
   <style>
@@ -19,12 +20,16 @@ let lastMousePos = null;
 const ROTATION_SPEED = 2;
 
 function preload() {
-  // Cargar imágenes desde Imgur
+  console.log("Intentando cargar imágenes desde el repositorio local...");
   try {
-    largeDisc = loadImage('Grande.gif');
-    smallDisc = loadImage('pequeño.gif');
+    largeDisc = loadImage('grande.gif'); // Asegúrate de que sea minúscula
+    console.log("grande.gif cargado exitosamente desde el repositorio.");
+    smallDisc = loadImage('pequeño.gif'); // Asegúrate de que sea minúscula
+    console.log("pequeño.gif cargado exitosamente desde el repositorio.");
   } catch (e) {
-    console.log("Error cargando imágenes, usando placeholders");
+    console.error("Error al cargar imágenes desde el repositorio:", e.message);
+    console.log("Detalles del error:", e);
+    console.log("Usando placeholders como fallback.");
     largeDisc = createGraphics(645, 614);
     largeDisc.fill(200, 200, 200, 128);
     largeDisc.ellipse(645/2, 614/2, 645, 614);
@@ -36,7 +41,7 @@ function preload() {
 
 function setup() {
   createCanvas(700, 700);
-  // Escalar imágenes al tamaño correcto
+  console.log("Lienzo creado. Dimensiones:", width, "x", height);
   if (largeDisc) largeDisc.resize(645, 614);
   if (smallDisc) smallDisc.resize(328, 319);
   textSize(20);
@@ -44,39 +49,40 @@ function setup() {
 }
 
 function draw() {
-  background(255); // Fondo blanco
+  background(255);
+  console.log("Dibujando frame...");
 
-  // Rotación con teclado (suave)
-  if (keyIsDown(65)) largeAngle += ROTATION_SPEED; // Tecla A
-  if (keyIsDown(68)) largeAngle -= ROTATION_SPEED; // Tecla D
+  if (keyIsDown(65)) largeAngle += ROTATION_SPEED;
+  if (keyIsDown(68)) largeAngle -= ROTATION_SPEED;
   if (keyIsDown(LEFT_ARROW)) smallAngle += ROTATION_SPEED;
   if (keyIsDown(RIGHT_ARROW)) smallAngle -= ROTATION_SPEED;
 
-  // Dibujar disco grande
   push();
   translate(width / 2, height / 2);
   rotate(radians(largeAngle));
   if (largeDisc) {
     image(largeDisc, -645 / 2, -614 / 2, 645, 614);
+    console.log("Dibujando grande.gif desde el repositorio.");
   } else {
     fill(200, 200, 200, 128);
     ellipse(0, 0, 645, 614);
+    console.log("Dibujando placeholder grande.");
   }
   pop();
 
-  // Dibujar disco pequeño (desplazado 15 píxeles hacia abajo)
   push();
   translate(width / 2, height / 2 + 15);
   rotate(radians(smallAngle));
   if (smallDisc) {
     image(smallDisc, -328 / 2, -319 / 2, 328, 319);
+    console.log("Dibujando pequeño.gif desde el repositorio.");
   } else {
     fill(150, 150, 150, 128);
     ellipse(0, 0, 328, 319);
+    console.log("Dibujando placeholder pequeño.");
   }
   pop();
 
-  // Mostrar ángulos
   fill(0);
   text(`Disco Grande: ${int(largeAngle % 360)}°`, 10, 30);
   text(`Disco Pequeño: ${int(smallAngle % 360)}°`, 10, 60);
@@ -118,12 +124,11 @@ function mouseDragged() {
 }
 
 function keyPressed() {
-  if (keyCode === 65) largeAngle += 45; // A: 45° izquierda
-  if (keyCode === 68) largeAngle -= 45; // D: 45° derecha
+  if (keyCode === 65) largeAngle += 45;
+  if (keyCode === 68) largeAngle -= 45;
   if (keyCode === LEFT_ARROW) smallAngle += 45;
   if (keyCode === RIGHT_ARROW) smallAngle -= 45;
 }
 </script>
 </body>
 </html>
-
