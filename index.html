@@ -20,16 +20,16 @@ let lastMousePos = null;
 const ROTATION_SPEED = 2;
 
 function preload() {
-  console.log("Intentando cargar imágenes desde el repositorio local...");
+  console.log("Intentando cargar imágenes 1.gif y 2.gif desde el repositorio...");
   try {
-    largeDisc = loadImage('1.gif'); // Asegúrate de que sea minúscula
-    console.log("grande.gif cargado exitosamente desde el repositorio.");
-    smallDisc = loadImage('2.gif'); // Asegúrate de que sea minúscula
-    console.log("pequeño.gif cargado exitosamente desde el repositorio.");
+    largeDisc = loadImage('1.gif');
+    console.log("1.gif cargado exitosamente desde el repositorio.");
+    smallDisc = loadImage('2.gif');
+    console.log("2.gif cargado exitosamente desde el repositorio.");
   } catch (e) {
     console.error("Error al cargar imágenes desde el repositorio:", e.message);
     console.log("Detalles del error:", e);
-    console.log("Usando placeholders como fallback.");
+    console.log("Usando placeholders como fallback debido a:", e.message);
     largeDisc = createGraphics(645, 614);
     largeDisc.fill(200, 200, 200, 128);
     largeDisc.ellipse(645/2, 614/2, 645, 614);
@@ -62,7 +62,7 @@ function draw() {
   rotate(radians(largeAngle));
   if (largeDisc) {
     image(largeDisc, -645 / 2, -614 / 2, 645, 614);
-    console.log("Dibujando grande.gif desde el repositorio.");
+    console.log("Dibujando 1.gif desde el repositorio.");
   } else {
     fill(200, 200, 200, 128);
     ellipse(0, 0, 645, 614);
@@ -75,7 +75,7 @@ function draw() {
   rotate(radians(smallAngle));
   if (smallDisc) {
     image(smallDisc, -328 / 2, -319 / 2, 328, 319);
-    console.log("Dibujando pequeño.gif desde el repositorio.");
+    console.log("Dibujando 2.gif desde el repositorio.");
   } else {
     fill(150, 150, 150, 128);
     ellipse(0, 0, 328, 319);
@@ -123,12 +123,4 @@ function mouseDragged() {
   }
 }
 
-function keyPressed() {
-  if (keyCode === 65) largeAngle += 45;
-  if (keyCode === 68) largeAngle -= 45;
-  if (keyCode === LEFT_ARROW) smallAngle += 45;
-  if (keyCode === RIGHT_ARROW) smallAngle -= 45;
-}
-</script>
-</body>
-</html>
+function
