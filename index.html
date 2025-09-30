@@ -85,42 +85,4 @@ function draw() {
 
   fill(0);
   text(`Disco Grande: ${int(largeAngle % 360)}°`, 10, 30);
-  text(`Disco Pequeño: ${int(smallAngle % 360)}°`, 10, 60);
-}
-
-function mousePressed() {
-  let mousePos = createVector(mouseX, mouseY);
-  let center = createVector(width / 2, height / 2);
-  let dist = mousePos.dist(center);
-  if (mouseButton === LEFT && dist < 645 / 2) {
-    draggingLarge = true;
-    lastMousePos = mousePos;
-  } else if (mouseButton === RIGHT && dist < 328 / 2) {
-    draggingSmall = true;
-    lastMousePos = mousePos;
-  }
-}
-
-function mouseReleased() {
-  draggingLarge = false;
-  draggingSmall = false;
-  lastMousePos = null;
-}
-
-function mouseDragged() {
-  if (draggingLarge || draggingSmall) {
-    let currentPos = createVector(mouseX, mouseY);
-    let center = createVector(width / 2, height / 2);
-    let lastVector = p5.Vector.sub(lastMousePos, center);
-    let currentVector = p5.Vector.sub(currentPos, center);
-    let angleDiff = degrees(currentVector.heading() - lastVector.heading());
-    if (draggingLarge) {
-      largeAngle -= angleDiff;
-    } else if (draggingSmall) {
-      smallAngle -= angleDiff;
-    }
-    lastMousePos = currentPos;
-  }
-}
-
-function
+  text(`Disco Peque
