@@ -21,8 +21,8 @@ const ROTATION_SPEED = 2;
 function preload() {
   // Cargar imágenes desde Imgur
   try {
-    largeDisc = loadImage('https://i.imgur.com/xlgkVbY.gif');
-    smallDisc = loadImage('https://i.imgur.com/delLeWb.gif');
+    largeDisc = loadImage('Grande.gif');
+    smallDisc = loadImage('pequeño.gif');
   } catch (e) {
     console.log("Error cargando imágenes, usando placeholders");
     largeDisc = createGraphics(645, 614);
@@ -126,3 +126,4 @@ function keyPressed() {
 </script>
 </body>
 </html>
+
